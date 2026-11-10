@@ -125,6 +125,7 @@ mark{background:var(--hl);color:inherit;border-radius:3px;padding:0 2px}
 .vh b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14.5px}
 .vh small{color:var(--mute)}
 .vw iframe{flex:1;border:0;width:100%;background:var(--soft)}
+.vfb{padding:8px 14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--mute)}.vfb a{color:var(--brand);cursor:pointer;text-decoration:underline}
 .sc{display:none;position:fixed;inset:0;background:rgba(8,16,30,.35);z-index:25}.sc.on{display:block}
 .x{border:1px solid var(--line);background:var(--surface);border-radius:9px;width:34px;height:34px;display:grid;place-items:center;cursor:pointer;color:var(--ink2)}
 .x:hover{border-color:var(--brand);color:var(--brand)}
@@ -200,6 +201,7 @@ footer{text-align:center;color:var(--mute);font-size:12.5px;padding:0 20px 36px}
     <a class="open" id="vo" target="_blank" rel="noopener"><svg><use href="#i-ext"/></svg>Mở tab mới</a>
     <button class="x" id="vx" aria-label="Đóng"><svg><use href="#i-x"/></svg></button></div>
   <iframe id="vf" title="PDF"></iframe>
+  <div class="vfb">Khung xem trống hoặc hiện biểu tượng lỗi? Bấm <a id="vo2" target="_blank" rel="noopener">mở PDF ở tab mới</a> hoặc <a id="vd" download>tải về</a>.</div>
 </aside>
 
 <script src="data/docs.js"></script>
@@ -242,7 +244,7 @@ $('#sv').onclick=()=>{onlyValid=true;run()};$('#sa').onclick=()=>{onlyValid=fals
 /* PDF viewer */
 function openPdf(d,p){
   $('#vt').textContent=d.title;$('#vp').textContent=(p?'Trang '+p+' · ':'')+d.pages+' trang';
-  $('#vo').href=url(d,p);$('#vf').src=url(d,p);$('#vw').classList.add('on');$('#sc').classList.add('on');
+  $('#vo').href=$('#vo2').href=url(d,p);$('#vd').href=url(d);$('#vf').src=url(d,p);$('#vw').classList.add('on');$('#sc').classList.add('on');
 }
 function closePdf(){$('#vw').classList.remove('on');$('#sc').classList.remove('on');setTimeout(()=>{$('#vf').src='about:blank'},260)}
 $('#vx').onclick=closePdf;$('#sc').onclick=closePdf;
